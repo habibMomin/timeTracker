@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="container">
+        <h1>Productivity Tracker</h1>
+        <p class="description">Track your activities and stay productive.</p>
+
+        <textarea id="input-text" placeholder="Enter your activity here..."></textarea>
+        <br>
+        <button id="save-btn">Save Activity</button>
+        <button id="reset-btn">Reset</button>
+        <button id="save-sheet-btn">Save to Storage</button>
+        <button id="download-excel-btn">Download as Excel</button>
+        <button id="install-btn" style="display: none;">Install App</button>
+
+        <table id="log-table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Activity</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <div id="status"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+    <script>
+        // Register the Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered with scope: ', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.log('Service Worker registration failed: ', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
